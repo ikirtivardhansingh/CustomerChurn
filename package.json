@@ -1,0 +1,23 @@
+{
+  "name": "customerchurn",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ikirtivardhansingh/CustomerChurn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ikirtivardhansingh/CustomerChurn/issues"
+  },
+  "homepage": "https://github.com/ikirtivardhansingh/CustomerChurn#readme",
+  "dependencies": {
+    "csv-parser": "^3.2.1"
+  }
+}
