@@ -1,7 +1,5 @@
 # Customer Churn Prediction in Core JavaScript
 
-## ML Restart Project
-
 ---
 
 # Project Overview
