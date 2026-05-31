@@ -1,5 +1,3 @@
-# PROJECT_GUIDE.md
-
 # Customer Churn Prediction in Core JavaScript
 
 ## ML Restart Project
