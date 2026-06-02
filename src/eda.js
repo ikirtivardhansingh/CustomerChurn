@@ -1,4 +1,3 @@
-const churnRate = require("./churnRate");
 function analyzeData(data){
 
     const totalCustomers = data.length;
@@ -12,6 +11,9 @@ function analyzeData(data){
     console.log("Total Churned Customers:", totalChurns);
     const ChurnedPerc = churnRate(totalCustomers, totalChurns).toFixed(2);
     console.log("Churn Rate:", ChurnedPerc + "%");
+}
+function churnRate(tc, churned){
+    return (churned/ tc) * 100;
 }
 
 module.exports = analyzeData;
