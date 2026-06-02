@@ -13,6 +13,7 @@ function analyzeData(data){
     console.log("Churn Rate:", ChurnedPerc + "%");
     avgTenure(data, totalCustomers);
     avgMonthCharges(data, totalCustomers);
+    missingVals(data);
 }
 
 function churnRate(tc, churned){
@@ -29,6 +30,11 @@ function avgMonthCharges(data, tc){
     const  avgmCharges = data.reduce((acc, customer) => acc + Number(customer.MonthlyCharges), 0)/tc
     
     console.log("avg Monthly Charges:", avgmCharges.toFixed(2));
+}
+
+function missingVals(data){
+    const missingVal = data.filter(customer => customer.TotalCharges === "").length;
+    console.log("Number of Missing Values: ", missingVal);
 }
 
 module.exports = analyzeData;
