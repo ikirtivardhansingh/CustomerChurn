@@ -6,10 +6,13 @@ function analyzeData(data){
         data.filter(customer => 
             customer.Churn === "Yes"
         ).length;
+    
+    const ChurnedPerc = 
+        churnRate(totalCustomers, totalChurns
+        ).toFixed(2);
 
     console.log("Total Customers:", totalCustomers);
     console.log("Total Churned Customers:", totalChurns);
-    const ChurnedPerc = churnRate(totalCustomers, totalChurns).toFixed(2);
     console.log("Churn Rate:", ChurnedPerc + "%");
     avgTenure(data, totalCustomers);
     avgMonthCharges(data, totalCustomers);
