@@ -1,6 +1,7 @@
 const loadData = require("./src/loadData");
 const analyzeData = require("./src/eda");
 const preprocessData = require("./src/preprocess");
+const trainModel = require("./src/trainingModel");
 
 async function main(){
     const data = await loadData("./data/WA_Fn-UseC_-Telco-Customer-Churn.csv");
@@ -11,6 +12,6 @@ async function main(){
     const result = preprocessData(data);
      console.log(result.x[0]);
      console.log(result.y[0]);
-
+    trainModel(data);
   }
   main();
