@@ -45,8 +45,11 @@ async function trainModel(data){
     */
 
     const X_test_tensor = tf.tensor2d(x_test);
-    const predictiom = model.predict(X_test_tensor);
-
+    const predictions = model.predict(X_test_tensor);
+    const y_test_tensor = tf.tensor2d(
+        y_test,
+        [y_test.length, 1]
+    );
     // if after this point I feel like revisiting the actual value,
     // I will have to do this:
     // const predictionArray = await predictions.array()
@@ -68,8 +71,12 @@ async function trainModel(data){
 
     console.log(`Accuracy: ${(accuracy * 100).toFixed(2)}%`)
 
-
-    
+    // const evaluation = model.evaluate(
+    //     X_test_tensor,
+    //     y_test_tensor
+    // );
+    // console.log("Loss:", lossTensor.dataSync()[0]);
+    // console.log("Accuracy:", accuracyTensor.dataSync()[0]);
 }
 
 module.exports = trainModel;
