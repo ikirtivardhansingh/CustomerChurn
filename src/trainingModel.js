@@ -16,18 +16,67 @@ async function trainModel(data){
     console.log("y_train", y_train.length);
     console.log("y_test", y_test.length);
 
-        const model = createModel();
+    const model = createModel();
 
-const X_train_tensor = tf.tensor2d(x_train);
-const y_train_tensor = tf.tensor2d(y_train, [y_train.length, 1]);
+    const X_train_tensor = tf.tensor2d(x_train);
+    const y_train_tensor = tf.tensor2d(y_train, [y_train.length, 1]);
 
-await model.fit(
-    X_train_tensor,
-    y_train_tensor,
-    {
-        epochs: 10
+    await model.fit(
+        X_train_tensor,
+        y_train_tensor,
+        {
+            epochs: 10
+        }
+    );
+    /*
+    what .fit() here dosw:
+    1. Take one training example
+    2. Predict
+    3. Calculate loss
+    4. Calculate gradients
+    5. Update weights using Adam
+    6. Repeat
+    addition: 
+    Run forward passes
+    Calculate loss
+    Run backpropagation
+    Update weights
+    Repeat for every batch and every epoch
+    */
+
+    const X_test_tensor = tf.tensor2d(x_test);
+    const predictions = model.predict(X_test_tensor);
+    const y_test_tensor = tf.tensor2d(
+        y_test,
+        [y_test.length, 1]
+    );
+    // if after this point I feel like revisiting the actual value,
+    // I will have to do this:
+    // const predictionArray = await predictions.array()
+    // or I can do this:
+    // const predictionArray = predictions.dataSync();
+
+    const predictedLabels = Array.from(predictions.dataSync())
+        .map(p => p >= 0.5 ? 1 : 0);
+        
+    let correct = 0;
+
+    for ( let i =0; i< y_test.length; i++){
+        if ( predictedLabels[i] === y_test[i]){
+            correct++;
+        }
     }
-);
+
+    const accuracy = correct / y_test.length;
+
+    console.log(`Accuracy: ${(accuracy * 100).toFixed(2)}%`)
+
+    // const evaluation = model.evaluate(
+    //     X_test_tensor,
+    //     y_test_tensor
+    // );
+    // console.log("Loss:", lossTensor.dataSync()[0]);
+    // console.log("Accuracy:", accuracyTensor.dataSync()[0]);
 }
 
 module.exports = trainModel;
