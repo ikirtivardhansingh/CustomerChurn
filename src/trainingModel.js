@@ -16,10 +16,10 @@ async function trainModel(data){
     console.log("y_train", y_train.length);
     console.log("y_test", y_test.length);
 
-        const model = createModel();
+    const model = createModel();
 
-const X_train_tensor = tf.tensor2d(x_train);
-const y_train_tensor = tf.tensor2d(y_train, [y_train.length, 1]);
+    const X_train_tensor = tf.tensor2d(x_train);
+    const y_train_tensor = tf.tensor2d(y_train, [y_train.length, 1]);
 
 await model.fit(
     X_train_tensor,

@@ -16,6 +16,7 @@ function createModel(data){
         loss: "binaryCrossentropy",
         metrics: ["accuracy"]
     });
+    return model;
       
 }
 
