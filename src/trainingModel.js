@@ -28,6 +28,28 @@ await model.fit(
         epochs: 10
     }
 );
+/*
+what .fit() here dosw:
+1. Take one training example
+2. Predict
+3. Calculate loss
+4. Calculate gradients
+5. Update weights using Adam
+6. Repeat
+*/
+
+const X_test_tensor = tf.tensor2d(x_test);
+const predictiom = model.predict(X_test_tensor);
+
+// if after this point I feel like revisiting the actual value,
+// I will have to do this:
+// const predictionArray = await predictions.array()
+// or I can do this:
+// const predictionArray = predictions.dataSync();
+
+const predictedLabels = Array.from(predictions.dataSync())
+    .map(p => p >= 0.5 ? 1 : 0);
+    
 }
 
 module.exports = trainModel;
