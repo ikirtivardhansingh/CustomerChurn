@@ -11,10 +11,10 @@ async function trainModel(data){
     const y_train = y.slice(0, splitIndex);
     const y_test = y.slice(splitIndex);
 
-    console.log("x_train", x_train.length);
-    console.log("x_test", x_test.length);
-    console.log("y_train", y_train.length);
-    console.log("y_test", y_test.length);
+    // console.log("x_train", x_train.length);
+    // console.log("x_test", x_test.length);
+    // console.log("y_train", y_train.length);
+    // console.log("y_test", y_test.length);
 
     const model = createModel();
 
@@ -28,6 +28,8 @@ async function trainModel(data){
             epochs: 10
         }
     );
+
+   // console.log("Weights:" + model.getWeights());
     /*
     what .fit() here dosw:
     1. Take one training example
@@ -77,6 +79,31 @@ async function trainModel(data){
     // );
     // console.log("Loss:", lossTensor.dataSync()[0]);
     // console.log("Accuracy:", accuracyTensor.dataSync()[0]);
+
+
+    let tp = 0, fp = 0, fn = 0, tn = 0;
+    for (let i = 0; i < y_test.length; i++){
+        if (predictedLabels[i] === 1 && y_test[i] === 1)
+            tp++;
+        else if (predictedLabels[i] === 0 && y_test[i] === 0)
+            tn++;
+        
+        else if (predictedLabels[i] === 1 && y_test[i] === 0)
+            fp++;
+        else if (predictedLabels[i] === 0 && y_test[i] === 1)
+            fn++;
+
+    }
+    console.log({tp, fp, fn, tn});
+    ///console.log(    Array.from(predictions.dataSync()).slice(0, 20));
+    const precision = (tp + fp) === 0 ? 0 : tp / (tp + fp);
+        console.log("Precision:", precision);
+    const recall = (tp + fn) === 0 ? 0 : tp / (tp + fn);
+        console.log("Recall:", recall);
+    const f1 = (precision + recall) === 0 ? 0 : 
+                2 * ((precision * recall) / 
+                    (precision + recall));
+    console.log("F1: ", f1);
 }
 
 module.exports = trainModel;
