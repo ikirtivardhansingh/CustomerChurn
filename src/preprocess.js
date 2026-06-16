@@ -7,9 +7,9 @@ function preprocessData(data){
     
     const cleanedData = data.map(customer => {
         return { 
-            tenure :        Number(customer.tenure),
-            monthlyCharges :Number(customer.MonthlyCharges),
-            totalCharges :  Number(customer.TotalCharges),
+            tenure :         (Number(customer.tenure) - 0) / (72 - 0),
+            monthlyCharges : (Number(customer.MonthlyCharges) - 18.25 ) / (118.75 - 18.25),
+            totalCharges :   (Number(customer.TotalCharges) - 0) / (8684.8 - 0),
             seniorCitizen : Number(customer.SeniorCitizen),
             churn :         customer.Churn === "Yes" ? 1 : 0,
             partner :       customer.Partner === "Yes" ? 1 : 0,
@@ -18,7 +18,22 @@ function preprocessData(data){
             contract :      contract[customer.Contract]
         };
         }
+        
     );
+//     console.log(
+//     Math.min(...cleanedData.map(c => c.tenure)),
+//     Math.max(...cleanedData.map(c => c.tenure))
+// );
+
+// console.log(
+//     Math.min(...cleanedData.map(c => c.monthlyCharges)),
+//     Math.max(...cleanedData.map(c => c.monthlyCharges))
+// );
+
+// console.log(
+//     Math.min(...cleanedData.map(c => c.totalCharges)),
+//     Math.max(...cleanedData.map(c => c.totalCharges))
+// );
     const x = cleanedData.map(customer => [
         customer.tenure,
         customer.monthlyCharges,
