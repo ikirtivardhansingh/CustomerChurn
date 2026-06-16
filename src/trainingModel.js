@@ -104,6 +104,36 @@ async function trainModel(data){
                 2 * ((precision * recall) / 
                     (precision + recall));
     console.log("F1: ", f1);
+
+
+
+    const newCustomer = [
+    0.5,    // tenure (scaled)
+    0.6,    // monthlyCharges (scaled)
+    0.4,    // totalCharges (scaled)
+    0,      // seniorCitizen
+    1,      // partner
+    0,      // dependents
+    1,      // paperlessBilling
+    0       // contract
+];
+
+const customerTensor =
+    tf.tensor2d([newCustomer]);
+
+    const prediction =
+    model.predict(customerTensor);
+    const probability =
+    prediction.dataSync()[0];
+
+console.log(
+    "Churn Probability:",
+    probability
+);
+
+
+
+
 }
 
 module.exports = trainModel;
